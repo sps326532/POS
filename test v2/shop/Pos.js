@@ -7,9 +7,9 @@ Pos.html = `
   <table>
   <thead>
     <tr>
+      <td align="center"><input type="button" id="0" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
       <td align="center"><input type="button" id="1" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
       <td align="center"><input type="button" id="2" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
-      <td align="center"><input type="button" id="3" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
     </tr>
   </thead>
   </table>
@@ -64,7 +64,7 @@ Pos.html = `
 
 Pos.start = function () {
   Shop.load()
-  Ui.show(pos.htm)
+  Ui.show(Pos.html)
   Ui.id('items').innerHTML = Pos.optionList(Shop.shop.items)
   Ui.id('addons').innerHTML = Pos.optionList(Shop.shop.addons)
   Order = Pos.newOrder()
