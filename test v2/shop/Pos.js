@@ -4,15 +4,6 @@ var Order = {}
 
 Pos.html = `
 <div>
-  <table>
-  <thead>
-    <tr>
-      <td align="center"><input type="button" id="0" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
-      <td align="center"><input type="button" id="1" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
-      <td align="center"><input type="button" id="2" style="width:356px;height:356px;" onclick="AddItem(this.id)"></td>
-    </tr>
-  </thead>
-  </table>
   <table id="orderTable">
   <thead>
     <tr>
