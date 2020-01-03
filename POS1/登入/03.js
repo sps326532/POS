@@ -1,3 +1,4 @@
+
 function changeSucceedStyle(nameID, spanID) { //如果输入成功的话，用来修改后面span的内容样式和输入框的颜色
 	spanID.firstChild.nodeValue = "*";
 	spanID.style.fontSize = "larger";
@@ -103,7 +104,7 @@ function username() {
 	username.onfocus = function() { //获得焦点时根据匹配成功与否修改span中的样式和内容
 		usernameCookie = getCookie(username.value + "username");
 		if(!(username.value == usernameCookie)) { //如果获得焦点时输入不正确，重新调整样式
-			usernameSpan.firstChild.nodeValue = "账户不存在"; //修改提示语句
+			usernameSpan.firstChild.nodeValue = "帳號不存在"; //修改提示语句
 			changeFailingStyle(username, usernameSpan); //修改为匹配中并且失败的样式
 		} else {
 			changeSucceedStyle(username, usernameSpan);
@@ -119,7 +120,7 @@ function username() {
 				password.onfocus();
 			}
 		} else { //匹配失败
-			usernameSpan.firstChild.nodeValue = "账户不存在"; //修改提示语句
+			usernameSpan.firstChild.nodeValue = "帳號不存在"; //修改提示语句
 			changeFailingStyle(username, usernameSpan);
 			if(password.value != "") { //如果此时密码的值不为空
 				password.onfocus();
@@ -152,7 +153,7 @@ function password() {
 		usernameCookie = getCookie(username.value + "username");//此时得到cookie中对应用户的账号
 		passwordCookie = getCookie(username.value + "password");//得到对应用户的密码
 		if(!(password.value == passwordCookie) || !(username.value == usernameCookie)) { //如果获得焦点时输入不正确，重新调整样式
-			passwordSpan.firstChild.nodeValue = "密码错误"; //修改提示语句
+			passwordSpan.firstChild.nodeValue = "密碼錯誤"; //修改提示语句
 			changeFailingStyle(password, passwordSpan); //修改为匹配中并且失败的样式
 		} else {
 			changeSucceedStyle(password, passwordSpan);
@@ -165,7 +166,7 @@ function password() {
 			changeSucceedStyle(password, passwordSpan); //修改为匹配成功的样式
 			vercode.focus(); //输入正确的话直接换行
 		} else { //匹配失败
-			passwordSpan.firstChild.nodeValue = "密码错误"; //修改提示语句
+			passwordSpan.firstChild.nodeValue = "密碼錯誤"; //修改提示语句
 			changeFailingStyle(password, passwordSpan);
 		}
 	}
@@ -185,7 +186,7 @@ function password() {
 var usernamenum = 0,
 	passwordnum = 0,
 	vercodenum = 0;
-
+	shopMaster = false
 function user() {
 	var user = document.getElementById("user");
 	var username = document.getElementById("username");
@@ -193,7 +194,8 @@ function user() {
 		if(usernamenum && passwordnum && vercodenum) {
 			document.cookie = "ID=1;"; //代表用户登录
 			document.cookie = "login=" + username.value;
-			location.href = "file:///C:/Users/user/Desktop/POS1/商品資料/index.html";
+			shopMaster = true
+			location.href = "../商品資料/indexmaster.html";
 		} else {
 			alert("請確認訊息填寫正確！");
 			return false;
@@ -207,7 +209,7 @@ function visitor() {
 		if(document.cookie != "") {//如果此时cookie为空的话，不进行保存cookie，否则ID不会在最后面一项
 			document.cookie = "ID=0;"; //代表游客登录
 		}
-		location.href = "file:///C:/Users/user/Desktop/POS1/商品資料/index.html";
+		location.href = "../商品資料/indexmain.html";
 	}
 }
 

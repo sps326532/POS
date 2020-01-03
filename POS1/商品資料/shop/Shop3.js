@@ -32,23 +32,3 @@ Shop3.save = function () {
 Shop3.load = function () {
   Shop3.shop = Db.load('Shop3') || Shop3.shop
 }
-
-Shop.mainPage = function () {
-  Shop3.load()
-  // Ui.html('#header', ShopMain.headerHtml)
-  // Ui.html('#menu', ShopMain.menuHtml)
-  Ui.show(`
-  <div>
-    <button onclick="Pos.start()">新增訂單</button>
-    <button onclick="Setting.start()">商店設定</button>
-    <button onclick="Shop.todayReport()">本日報表</button>
-    <button onclick="Report.start()">全部報表</button>
-    <button onclick="Storage.start()">資料處理</button>
-  </div>
-  `)
-  Ui.title(Shop3.shop.name)
-}
-
-Shop3.todayReport = function () {
-  Report.start({range: Lib.dayRange(new Date())})
-}

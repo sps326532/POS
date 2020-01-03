@@ -17,7 +17,7 @@ const Pos7 = {}
 var Order = {}
 
 var poswitch = false
-
+    submittedcheck = false
 Pos.html = `
 <div>
   <table id="orderTable">
@@ -27,22 +27,22 @@ Pos.html = `
       <td><select id="addons" onchange="Pos.calcPrice()"></select></td>
       <td><input id="price" type="text" value="0" style="width:4em"></td>
       <td nowrap>
-        <input id="quantity" onclick="this.value=''" type="text" list="quantityData" value="1" style="width:4em">
-        <datalist id="quantityData">
-          <option value="1">
-          <option value="2">
-          <option value="3">
-          <option value="4">
-          <option value="5">
-          <option value="6">
-          <option value="7">
-          <option value="8">
-          <option value="9">
-          <option value="10">
-          <option value="20">
-          <option value="50">
-          <option value="100">
-          </datalist>
+      <input id="quantity" onclick="this.value=''" type="text" list="quantityData" value="1" style="width:4em">
+      <datalist id="quantityData">
+        <option value="1">
+        <option value="2">
+        <option value="3">
+        <option value="4">
+        <option value="5">
+        <option value="6">
+        <option value="7">
+        <option value="8">
+        <option value="9">
+        <option value="10">
+        <option value="20">
+        <option value="50">
+        <option value="100">
+        </datalist>
           <button onclick="Pos.addItem()">新增</button>
       </td>
     </tr>
@@ -184,12 +184,21 @@ Pos.goShop = function () {
     if (confirm('您的訂單尚未送出，請問是否要放棄該訂單？')) {
       Order = Pos.newOrder()
       poswitch = "false"
-      window.location.href='../主頁/主頁.html'
+      if(shopMaster){
+        shopMaster = false
+        Shop.masterPage()
+      }
+      else Shop.mainPage()
       return
     } else {
       return
     }
   }
+  if(shopMaster){
+    shopMaster = false
+    Shop.masterPage()
+  }
+  else Shop.mainPage()
 }
 
 Pos.abort = function () {
@@ -201,7 +210,8 @@ Pos.abort = function () {
 }
 
 Pos.newOrder = function () {
-  return {totalPrice: 0, records: [], submitted: false}
+  if(submittedcheck) return {totalPrice: 0, records: [], submitted: true}
+  else return {totalPrice: 0, records: [], submitted: false}
 }
 
 Pos.submit = function () {
@@ -216,6 +226,7 @@ Pos.submit = function () {
   Ui.id('submit').innerHTML = '已送出'
   Ui.id('abort').disabled = 'disabled'
   Ui.id('newOrder').disabled = ''
+  submittedcheck = true
   Order = Pos.newOrder()
 }
 
@@ -248,11 +259,13 @@ Pos.calcPrice = function () {
 Pos.addItem = function () {
   let {item, addon, price} = Pos.calcPrice()
   let quantity = parseInt(Ui.id('quantity').value)
+  if(quantity>=1&&quantity%quantity==0){
   let record = {item: item, addon:addon, price: price, quantity: quantity}
   Order.records.push(record)
   Ui.id('orderTableBody').innerHTML = Pos.list(Order.records)
   Order.totalPrice += price * quantity
   Ui.id('totalPrice').value = Order.totalPrice
+  }
 }
 
 function AddItem(AddId){

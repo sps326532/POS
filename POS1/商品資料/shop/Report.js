@@ -11,7 +11,7 @@ Report.html = `
       <label>總收入：</label>
       <label id="reportTotal"></label>
       <br/><br/>
-      <button onclick="Shop.mainPage()">回主選單</button>
+      <button onclick="Shop.masterPage()">回主選單</button>
     </div>
   </div>
   <div id="detail" class="panel" style="display:none">

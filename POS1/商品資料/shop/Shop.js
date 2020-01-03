@@ -1,4 +1,5 @@
 const Shop = {}
+var shopMaster = false
 
 Shop.shop = {
   name: '早安! 美味堡',
@@ -36,9 +37,28 @@ Shop.mainPage = function () {
   Shop.load()
   // Ui.html('#header', ShopMain.headerHtml)
   // Ui.html('#menu', ShopMain.menuHtml)
+    Ui.show(`
+    <div>
+      <button onclick="Pos.start()">漢堡</button>
+      <button onclick="Pos1.start()">蛋餅</button>
+      <button onclick="Pos2.start()">總匯三明治</button>
+      <button onclick="Pos3.start()">吐司</button>
+      <button onclick="Pos4.start()">抓餅</button>
+      <button onclick="Pos5.start()">中式</button>
+      <button onclick="Pos6.start()">小品</button>
+      <button onclick="Pos7.start()">飲品</button>
+    </div>
+    `)
+    
+  Ui.title(Shop.shop.name)
+}
+Shop.masterPage = function () {
+  Shop.load()
+  // Ui.html('#header', ShopMain.headerHtml)
+  // Ui.html('#menu', ShopMain.menuHtml)
+  shopMaster = true
   Ui.show(`
   <div>
-    <button onclick="Pos.start()">新增訂單</button>
     <button onclick="Setting.start()">商店設定</button>
     <button onclick="Shop.todayReport()">本日報表</button>
     <button onclick="Report.start()">全部報表</button>
